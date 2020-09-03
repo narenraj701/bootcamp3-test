@@ -1,0 +1,19 @@
+pipeline {
+    agent any
+    stages {
+        stage('Build') {
+            steps {
+                dir("budget-tracker/services/user-service") {
+                    sh 'mvn -B -DskipTests clean package'
+                }
+            }
+        }
+        stage('Test') {
+            steps {
+                dir("budget-tracker/services/user-service") {
+                    sh 'mvn test'
+                }
+            }
+        }
+    }
+}
