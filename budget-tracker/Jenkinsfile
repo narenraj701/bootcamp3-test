@@ -32,12 +32,13 @@ pipeline {
             stage('Deploy Docker Image to Dockerhub') {
               steps{
               sh 'cat ~/GH_TOKEN.txt | docker login docker.pkg.github.com -u narenraj701 --password-stdin'
-                script {
-
-                  docker.withRegistry( '', registryCredential ) {
-                    dockerImage.push()
-                  }
-                }
+              sh 'docker push '+dockerImage
+//                 script {
+//
+//                   docker.withRegistry( '', registryCredential ) {
+//                     dockerImage.push()
+//                   }
+//                 }
               }
             }
         stage('Build budget-service') {
