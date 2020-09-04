@@ -22,7 +22,7 @@ pipeline {
                         }
                     }
                 }
-                stage('Test user-service') {
+                stage('Test budget-service') {
                     steps {
                         dir("budget-tracker/services/budget-service") {
                             sh 'mvn test'
@@ -50,7 +50,7 @@ pipeline {
                                         }
                                     }
                                 }
-                                stage('Test user-service') {
+                                stage('Test notification-service') {
                                     steps {
                                         dir("budget-tracker/services/notification-service") {
                                             sh 'mvn test'
