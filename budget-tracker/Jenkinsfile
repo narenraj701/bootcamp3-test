@@ -1,19 +1,61 @@
 pipeline {
     agent any
     stages {
-        stage('Build') {
+        stage('Build user-service') {
             steps {
                 dir("budget-tracker/services/user-service") {
                     sh 'mvn -B -DskipTests clean package'
                 }
             }
         }
-        stage('Test') {
+        stage('Test user-service') {
             steps {
                 dir("budget-tracker/services/user-service") {
                     sh 'mvn test'
                 }
             }
         }
+        stage('Build budget-service') {
+                    steps {
+                        dir("budget-tracker/services/budget-service") {
+                            sh 'mvn -B -DskipTests clean package'
+                        }
+                    }
+                }
+                stage('Test user-service') {
+                    steps {
+                        dir("budget-tracker/services/budget-service") {
+                            sh 'mvn test'
+                        }
+                    }
+                }
+                stage('Build transaction-service') {
+                            steps {
+                                dir("budget-tracker/services/transaction-service") {
+                                    sh 'mvn -B -DskipTests clean package'
+                                }
+                            }
+                        }
+                        stage('Test transaction-service') {
+                            steps {
+                                dir("budget-tracker/services/transaction-service") {
+                                    sh 'mvn test'
+                                }
+                            }
+                        }
+                        stage('Build notification-service') {
+                                    steps {
+                                        dir("budget-tracker/services/notification-service") {
+                                            sh 'mvn -B -DskipTests clean package'
+                                        }
+                                    }
+                                }
+                                stage('Test user-service') {
+                                    steps {
+                                        dir("budget-tracker/services/notification-service") {
+                                            sh 'mvn test'
+                                        }
+                                    }
+                                }
     }
 }
