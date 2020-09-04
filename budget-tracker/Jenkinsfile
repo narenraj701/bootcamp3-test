@@ -1,8 +1,8 @@
 pipeline {
     agent any
     environment {
-            registry = "narenraj48/my-images"
-            registryCredential = 'dockerhub'
+            registry = "docker.pkg.github.com/narenraj701/bootcamp3-test/user"
+            registryCredential = 'github-registry'
             dockerImage=''
           }
     stages {
@@ -20,21 +20,19 @@ pipeline {
                 }
             }
         }
-        stage('Building image') {
+        stage('Building Docker Image') {
               steps{
               dir("budget-tracker/services/user-service"){
               script {
                          dockerImage = docker.build registry + ":$BUILD_NUMBER"
-//                         sh 'docker login -u narenraj48 -p Raina#123'
-//                         sh 'docker build -t narenraj48/my-images:usertest . --no-cache'
-//                         sh 'docker push narenraj48/my-images:usertest'
                        }
               }
               }
             }
-            stage('Deploy Image') {
+            stage('Deploy Docker Image to Dockerhub') {
               steps{
                 script {
+
                   docker.withRegistry( '', registryCredential ) {
                     dockerImage.push()
                   }
