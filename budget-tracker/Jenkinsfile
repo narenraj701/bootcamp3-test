@@ -3,7 +3,7 @@ pipeline {
     environment {
             registry = "narenraj48/my-images"
             registryCredential = 'dockerhub'
-            dockerImage = ''
+            dockerImage=''
           }
     stages {
         stage('Build user-service') {
