@@ -6,6 +6,11 @@ pipeline {
             dockerImage=''
           }
     stages {
+    environment {
+        registry = "narenraj48/my-images"
+        registryCredential = 'dockerhub'
+        dockerImage = ''
+      }
         stage('Build user-service') {
             steps {
                 dir("budget-tracker/services/user-service") {
