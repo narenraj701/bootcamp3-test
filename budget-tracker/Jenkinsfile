@@ -23,6 +23,7 @@ pipeline {
         stage('Building Docker Image') {
               steps{
               dir("budget-tracker/services/user-service"){
+                sh 'cat ~/GH_TOKEN.txt | docker login docker.pkg.github.com -u narenraj701 --password-stdin'
               script {
                          dockerImage = docker.build registry + ":$BUILD_NUMBER"
                        }
