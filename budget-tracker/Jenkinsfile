@@ -1,6 +1,11 @@
 pipeline {
     agent any
     stages {
+    environment {
+        registry = "narenraj48/my-images"
+        registryCredential = 'dockerhub'
+        dockerImage = ''
+      }
         stage('Build user-service') {
             steps {
                 dir("budget-tracker/services/user-service") {
@@ -15,6 +20,24 @@ pipeline {
                 }
             }
         }
+        stage('Building image') {
+              steps{
+              dir("budget-tracker/services/user-service"){
+              script {
+                         dockerImage = docker.build registry + ":$BUILD_NUMBER"
+                       }
+              }
+              }
+            }
+            stage('Deploy Image') {
+              steps{
+                script {
+                  docker.withRegistry( '', registryCredential ) {
+                    dockerImage.push()
+                  }
+                }
+              }
+            }
         stage('Build budget-service') {
                     steps {
                         dir("budget-tracker/services/budget-service") {
