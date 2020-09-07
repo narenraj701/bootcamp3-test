@@ -8,7 +8,7 @@ pipeline {
         }
         }
         }
-        stage("Build and Push Docker Image to Github Registry "){
+        stage("Build and Push front end Docker Image to Github Registry "){
         environment {
                             registry = "docker.pkg.github.com/narenraj701/bootcamp3-test/client-service"
                             dockerImage=''
@@ -38,7 +38,7 @@ pipeline {
                 }
             }
         }
-        stage('Building and Push Docker Image to Github Registry') {
+        stage('Building and Push user-service Docker Image to Github Registry') {
         environment {
                     registry = "docker.pkg.github.com/narenraj701/bootcamp3-test/user-service"
                     dockerImage=''
