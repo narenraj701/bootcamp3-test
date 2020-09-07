@@ -111,34 +111,5 @@ pipeline {
                                       }
                                       }
                                     }
-                        stage('Build notification-service') {
-                                    steps {
-                                        dir("budget-tracker/services/notification-service") {
-                                            sh 'mvn -B -DskipTests clean package'
-                                        }
-                                    }
-                                }
-                                stage('Test notification-service') {
-                                    steps {
-                                        dir("budget-tracker/services/notification-service") {
-                                            sh 'mvn test'
-                                        }
-                                    }
-                                }
-                                stage('Building and Push Docker Image to Github Registry') {
-                                        environment {
-                                                    registry = "docker.pkg.github.com/narenraj701/bootcamp3-test/notification-service"
-                                                    dockerImage=''
-                                                  }
-                                              steps{
-                                              dir("budget-tracker/services/notification-service"){
-                                              script {
-                                                         dockerImage = docker.build registry + ":$BUILD_NUMBER"
-                                                       }
-                                                        sh 'echo ${GH_TOKEN} | docker login docker.pkg.github.com -u narenraj701 --password-stdin'
-                                                        sh 'docker push '+registry+":$BUILD_NUMBER"
-                                              }
-                                              }
-                                            }
     }
 }
