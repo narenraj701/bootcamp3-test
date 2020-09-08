@@ -39,7 +39,7 @@ pipeline {
         }
         stage('Building and Push user-service Docker Image to Github Registry') {
             environment {
-                registry = 'docker.pkg.github.com/narenraj701/bootcamp3-test/user-service'
+                registry = '${GIT_REPO}'+'user-service'
                 dockerImage = ''
             }
             steps {
@@ -68,7 +68,7 @@ pipeline {
         }
         stage('Building and Push budget-service Docker Image to Github Registry') {
                 environment {
-                    registry = 'docker.pkg.github.com/narenraj701/bootcamp3-test/budget-service'
+                    registry = '${GIT_REPO}'+'budget-service'
                     dockerImage = ''
                 }
                 steps {
@@ -97,7 +97,7 @@ pipeline {
         }
         stage('Building and Push Transaction-service Docker Image to Github Registry') {
             environment {
-                registry = 'docker.pkg.github.com/narenraj701/bootcamp3-test/transaction-service'
+                registry = '${GIT_REPO}'+'transaction-service'
                 dockerImage = ''
             }
                 steps {
